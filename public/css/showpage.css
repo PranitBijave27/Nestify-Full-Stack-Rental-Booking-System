@@ -1,0 +1,78 @@
+.star-rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 10px;
+}
+
+.star-rating-input input {
+    display: none;
+}
+
+.star-rating-input label {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #ddd;
+    transition: 0.2s;
+}
+
+.star-rating-input input:checked~label,
+.star-rating-input label:hover,
+.star-rating-input label:hover~label {
+    color: #ff385c;
+}
+
+/* UI Enhancements */
+.show-img {
+    height: 450px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.sticky-reserve-card {
+    position: sticky;
+    top: 100px;
+    border: 1px solid #ddd !important;
+    border-radius: 1.5rem !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+.btn-reserve {
+    background: linear-gradient(90deg, #ff385c 0%, #e61e4d 100%);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-weight: 700;
+    width: 100%;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.btn-reserve:hover {
+    opacity: 0.9;
+    transform: scale(1.01);
+    color: white;
+}
+
+/* Review Card Grid */
+.review-card {
+    border: 1px solid #eee !important;
+    transition: 0.3s;
+}
+
+.review-card:hover {
+    border-color: #ff385c !important;
+}
+
+.btn-delete-review {
+    color: #717171;
+    border: none;
+    background: none;
+    transition: 0.2s;
+}
+
+.btn-delete-review:hover {
+    color: #ff385c;
+    transform: scale(1.1);
+}

@@ -1,0 +1,33 @@
+<%- layout("/layouts/boilerplate") %>
+
+<div class="container mt-4 mb-5">
+  <h2 class="mb-4 fw-bold">Explore <span class="text-rose">Destinations</span></h2>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% allListings.forEach(function(listing) { %>
+      <div class="col">
+        <div class="listing-card h-100"> <a href="/listing/<%= listing._id %>" class="text-decoration-none">
+            <div class="position-relative overflow-hidden rounded-top-4">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>">
+              <div class="card-img-overlay d-flex justify-content-end align-items-start">
+                <i class="fa-regular fa-heart fs-4 text-white"></i>
+              </div>
+            </div>
+          </a>
+          <div class="card-body px-1">
+            <a href="/listing/<%= listing._id %>" class="text-decoration-none text-dark">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h5 class="card-title mb-0 text-truncate fw-bold"><%= listing.title %></h5>
+                <span class="price-tag">₹<%= listing.price.toLocaleString("en-IN") %> <small class="text-muted fw-normal">/ night</small></span>
+              </div>
+              <p class="card-text text-muted small mb-3">
+                <i class="fa-solid fa-location-dot me-1 text-rose"></i> <%= listing.location %>, <%= listing.country %>
+              </p>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>

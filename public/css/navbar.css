@@ -1,0 +1,101 @@
+.custom-navbar{
+    background:#1A1A1A;
+    padding:10px 0;
+    z-index:1050;
+    width: 100%;
+    transition: transform 0.3s ease-in-out; 
+    border-bottom:1px solid #333;
+    position: fixed;
+    top: 0;
+}
+
+.brand-icon{
+    color:#FF385C;
+    font-size:1.5rem;
+    transform:rotate(-15deg);
+    animation:floatFeather 3s ease-in-out infinite;
+    transition:.3s;
+}
+
+@keyframes floatFeather{
+    0%,100%{transform:rotate(-15deg) translateY(0)}
+    50%{transform:rotate(-10deg) translateY(-5px)}
+}
+
+.brand-text{
+    color:#fff !important;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:1.3rem;
+    letter-spacing:-.5px;
+}
+.nav-up {
+    transform: translateY(-100%); /* Hides the navbar upwards */
+}
+.nav-link{
+    color:rgba(255,255,255,0.85) !important;
+    font-weight:500;
+    transition:.2s;
+}
+
+.nav-link:hover{
+    color:#FF385C !important;
+}
+
+.nav-link.active{
+    color:var(--brand-rose)!important;
+}
+/* search */
+.search-input{
+    border-radius:50px;
+    padding:6px 15px;
+    background:var(--brand-gray)!important;
+    border:1px solid #444!important;
+    border-radius:50px;
+    color:#f6f6f6!important;
+    padding-left:1.5rem;
+    transition:.3s;
+}
+.search-input::placeholder{
+    color:rgba(255,255,255,.5)!important;
+    opacity:1;
+}
+
+.search-input:focus{
+    border-color:var(--brand-rose)!important;
+    box-shadow:0 0 0 .25rem rgba(255,56,92,.25);
+}
+.btn-search{
+    background:#FF385C;
+    color:#fff;
+    border-radius:50px;
+    padding:6px 15px;
+}
+
+.btn-search:hover{
+    background:#e31c5f;
+}
+
+.btn-rose {
+    background-color: #FF385C;
+    color: #fff !important;
+    border: none;
+}
+
+.btn-rose:hover,
+.btn-rose:focus {
+    background-color: #E31C5F !important;
+    color: #fff !important;
+}
+
+.dropdown-item:hover{
+    display: block;
+    width: 100%;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: underline;
+    border-radius: 20px;
+}

@@ -1,0 +1,81 @@
+<%- layout("/layouts/boilerplate") %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      
+      <div class="card shadow-sm border-0 rounded-4 p-4 p-lg-5">
+        <h2 class="fw-bold text-dark mb-1 text-center">Edit Your <span class="text-rose">Nest</span></h2>
+        <p class="text-muted mb-4 text-center">Update your property details below.</p>
+
+        <div class="mb-4 text-center">
+            <p class="text-muted small fw-bold text-uppercase mb-2">Current Image</p>
+            <div class="d-inline-block position-relative">
+                <img src="<%= blurImage %>" 
+                     class="rounded-4 shadow-sm border" 
+                     style="width: 200px; height: 130px; object-fit: cover;"
+                     alt="current-image">
+            </div>
+        </div>
+
+        <form action="/listing/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Title</label>
+            <input type="text" class="form-control" name="listing[title]" 
+                   value="<%= listing.title %>" placeholder="e.g. Luxury Apartment" required>
+            <div class="invalid-feedback">Please provide a Title.</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Description</label>
+            <textarea class="form-control" name="listing[description]" rows="4" 
+                      placeholder="Describe the updates..." required><%= listing.description %></textarea>
+            <div class="invalid-feedback">Please provide a description.</div>
+          </div>
+
+          <div class="mb-3">
+        <label for="image" class="form-label fw-semibold">Upload New Image</label>
+        <input type="file" name="image" class="form-control">
+        <small class="text-muted">Leave blank to keep the current image.</small>
+        </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Price (₹)</label>
+              <input type="number" class="form-control" name="listing[price]" 
+                     value="<%= listing.price %>" min="1" required>
+              <div class="invalid-feedback">Price must be greater than 0.</div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label class="form-label fw-semibold">Country</label>
+              <input type="text" class="form-control" name="listing[country]" 
+                     value="<%= listing.country %>" required>
+              <div class="invalid-feedback">Please provide a valid Country.</div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Location</label>
+            <input type="text" class="form-control" name="listing[location]" 
+                   value="<%= listing.location %>" required>
+            <div class="invalid-feedback">Please provide a valid location.</div>
+          </div>
+
+          <button class="btn btn-rose w-100 border-0 py-2 shadow-sm">
+            <i class="fa-solid fa-check-double me-2"></i>Update Nest
+          </button>
+
+          <div class="text-center mt-3">
+             <a href="/listing/<%= listing._id %>" class="text-muted small text-decoration-none">
+               <i class="fa-solid fa-arrow-left me-1"></i>Cancel and go back
+             </a>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

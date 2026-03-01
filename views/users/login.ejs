@@ -1,0 +1,47 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <div class="auth-card shadow-lg p-5 rounded-5 bg-white border">
+        <h2 class="text-center mb-4 signup-heading">Log In</h2>
+        <div class="text-center mb-4">
+            <div class="brand-logo-circle mb-3">
+                <i class="fa-solid fa-feather-pointed brand-icon"></i>
+            </div>
+            <h3 class="fw-bold auth-title text-dark">Welcome Back</h3>
+            <p class="text-muted small">The world is waiting for you.</p>
+        </div>
+
+        <form action="/login" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <div class="input-group-custom">
+                    <i class="fa-regular fa-user input-icon"></i>
+                    <input name="username" type="text" class="form-control premium-input" placeholder="Username" required>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="input-group-custom">
+                    <i class="fa-regular fa-lock input-icon"></i>
+                    <input name="password" type="password" class="form-control premium-input" placeholder="Password" required>
+                </div>
+            </div>
+
+            <button class="btn btn-rose w-100 py-3 fw-bold rounded-pill shadow-sm">Log In
+            </button>
+        </form>
+
+        <div class="divider my-4">
+            <span>or</span>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-outline-dark rounded-pill py-2 small fw-semibold">
+                <i class="fa-brands fa-google me-2"></i> Continue with Google
+            </button>
+        </div>
+
+        <p class="text-center mt-4 text-muted small">
+            New to Nestify? <a href="/signup" class="text-rose fw-bold text-decoration-none">Create an account</a>
+        </p>
+    </div>
+</div>

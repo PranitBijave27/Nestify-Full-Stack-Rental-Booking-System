@@ -1,0 +1,68 @@
+.signup-heading {
+    font-weight: 700;
+    color: #222;
+    letter-spacing: -0.5px;
+}
+
+.auth-card {
+    max-width: 450px;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.brand-logo-circle {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 56, 92, 0.1);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.input-group-custom {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: #999;
+    z-index: 5;
+}
+
+.premium-input {
+    padding: 12px 12px 12px 45px;
+    border-radius: 12px;
+    border: 1.5px solid #eee;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.premium-input:focus {
+    outline: none;
+    border-color: var(--brand-rose);
+    box-shadow: 0 0 0 4px rgba(255,56,92,0.15);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ccc;
+    font-size: 0.8rem;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.divider span {
+    padding: 0 10px;
+}

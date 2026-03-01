@@ -1,0 +1,154 @@
+<%- layout("/layouts/boilerplate") %>
+
+    <div class="container mt-4 pb-5">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h2 class="fw-bold mb-1">
+                    <%= foundListing.title %>
+                </h2>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted"><i class="fa-solid fa-star text-rose"></i> 4.9 · <%= foundListing.location
+                            %>, <%= foundListing.country %></span>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-light border rounded-pill px-3" onclick="copyUrl()">
+                            <i class="fa-solid fa-share-nodes me-2"></i>Share
+                        </button>
+                        <button class="btn btn-sm btn-light border rounded-pill px-3" onclick="toggleSave(this)">
+                            <i class="fa-regular fa-heart me-2"></i>Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <img src="<%= foundListing.image.url %>" class="show-img shadow-sm mb-4" alt="listing_image">
+
+        <div class="row mt-2">
+            <div class="col-lg-8 pe-lg-5">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="owner-avatar-circle me-3"
+                        style="width: 50px; height: 50px; font-size: 2rem; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                        <i class="fa-solid fa-user-astronaut text-secondary"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-0">Hosted by <%= foundListing.owner.username %>
+                        </h5>
+                        <small class="text-muted">Verified Host · Joined <%= foundListing.owner.createdAt.getFullYear()
+                                %></small>
+                    </div>
+                </div>
+
+                <hr class="opacity-10">
+                <p class="text-secondary lh-lg mb-5" style="font-size: 1.1rem;">
+                    <%= foundListing.description %>
+                </p>
+
+                <div class="mt-5">
+                    <h4 class="fw-bold mb-4">Guest Reviews (<%= foundListing.reviews.length %>)</h4>
+                    <div class="row g-4">
+                        <% for(let review of foundListing.reviews) { %>
+                            <div class="col-md-6">
+                                <div class="card p-3 review-card rounded-4 bg-white shadow-none">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="me-2 text-rose small">
+                                                <% for(let i=0; i<5; i++) { %>
+                                                    <i class="fa-<%= i < review.rating ? 'solid' : 'regular' %> fa-star"></i>
+                                                    <% } %>
+                                            </div>
+                                            <span class="fw-bold small"><%= review.author.username %></span>
+                                        </div>
+                                        <% if(currUser && currUser._id.equals(review.author._id)){ %>
+                                            <form method="POST"
+                                                action="/listing/<%= foundListing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                                <button class="btn-delete-review"><i
+                                                        class="fa-solid fa-xmark"></i></button>
+                                            </form>
+                                            <% } %>
+                                    </div>
+                                    <p class="text-muted small mb-0">
+                                        <%= review.comment %>
+                                    </p>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card sticky-reserve-card p-4">
+                    <div class="d-flex justify-content-between mb-4">
+                        <h3 class="fw-bold mb-0">₹<%= foundListing.price.toLocaleString("en-IN") %><span
+                                    class="fs-6 fw-normal text-muted"> / night</span></h3>
+                    </div>
+
+                    <% if(currUser && !currUser._id.equals(foundListing.owner._id)){ %>
+                        <form action="/listing/<%= foundListing._id %>/bookings" method="POST">
+                            <div class="border rounded-3 mb-3 p-3 bg-light text-center">
+                                <small class="fw-bold text-muted text-uppercase"
+                                    style="font-size: 0.6rem;">Availability</small>
+                                <p class="mb-0 small fw-bold">Instant Booking Available</p>
+                            </div>
+                            <button class="btn-reserve mb-3">Reserve Now</button>
+                        </form>
+                        <% } else if (currUser && currUser._id.equals(foundListing.owner._id)) { %>
+                            <div class="text-center">
+                                <a href="/listing/<%= foundListing._id %>/edit"
+                                    class="btn btn-dark w-100 rounded-3 mb-2 py-2">Edit My Nest</a>
+                                <form method="POST" action="/listing/<%=foundListing._id%>?_method=DELETE">
+                                    <button class="btn btn-outline-danger w-100 rounded-3 py-2">Remove Listing</button>
+                                </form>
+                            </div>
+                            <% } else { %>
+                                <a href="/login" class="btn btn-dark w-100 py-3 rounded-3 fw-bold">Login to Reserve</a>
+                                <% } %>
+                                    <hr class="my-4">
+                                    <div class="d-flex justify-content-between text-muted small">
+                                        <span>Service fee</span>
+                                        <span>₹0</span>
+                                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if(currUser && !currUser._id.equals(foundListing.owner._id)){ %>
+        <div class="bg-light mt-5 py-5 border-top">
+            <div class="container col-lg-6 mx-auto">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold">How was your stay?</h3>
+                        <p class="text-muted">Your feedback helps others find their perfect nest.</p>
+                    </div>
+
+                    <form action="/listing/<%= foundListing._id %>/reviews" method="POST" class="needs-validation"
+                        novalidate>
+                        <div class="star-rating-input mb-4">
+                            <input type="radio" id="star5" name="review[rating]" value="5" required /><label for="star5"
+                                title="5 stars"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star4" name="review[rating]" value="4" /><label for="star4"
+                                title="4 stars"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star3" name="review[rating]" value="3" /><label for="star3"
+                                title="3 stars"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star2" name="review[rating]" value="2" /><label for="star2"
+                                title="2 stars"><i class="fa-solid fa-star"></i></label>
+                            <input type="radio" id="star1" name="review[rating]" value="1" /><label for="star1"
+                                title="1 star"><i class="fa-solid fa-star"></i></label>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <textarea name="review[comment]" class="form-control shadow-none"
+                                placeholder="Leave a comment here" id="floatingTextarea"
+                                style="height: 120px; border-radius: 12px;" required></textarea>
+                            <label for="floatingTextarea">Share the details of your experience...</label>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn-reserve px-5 py-2 w-auto">Submit Review</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>

@@ -1,0 +1,27 @@
+<div class="flash-container">
+    <% if(success && success.length) { %>
+    <div class="alert alert-success alert-dismissible fade show shadow-sm border-0 rounded-4 custom-flash" role="alert">
+        <div class="d-flex align-items-center">
+            <i class="fa-solid fa-circle-check fs-4 me-3 text-success"></i>
+            <div>
+                <strong class="d-block text-dark small fw-bold">Success</strong>
+                <span class="text-muted small"><%= success %></span>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+
+    <% if(error && error.length) { %>
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm border-0 rounded-4 custom-flash" role="alert">
+        <div class="d-flex align-items-center">
+            <i class="fa-solid fa-circle-exclamation fs-4 me-3 text-danger"></i>
+            <div>
+                <strong class="d-block text-dark small fw-bold">Oops!</strong>
+                <span class="text-muted small"><%= error %></span>
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+</div>

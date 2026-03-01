@@ -1,0 +1,70 @@
+/* Layout */
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Card */
+.error-card {
+    max-width: 400px; /* Reduced width for a tighter look */
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+/* Morphing Blob */
+.brand-blob {
+    background-color: #FF385C;
+    width: 60px; /* Smaller icon size */
+    height: 60px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morphing 6s infinite ease-in-out;
+}
+
+@keyframes morphing {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+}
+
+/* 404 Text */
+.error-code {
+    font-size: 70px; /* Scaled down from 112px */
+    font-weight: 800;
+    color: #222222;
+    margin: 0;
+}
+
+/* Smaller, Simple Button */
+.btn-rose {
+    background-color: #FF385C;
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px; /* Standard button padding */
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px; /* Fixed font size */
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn-rose:hover {
+    background-color: #e31c5f;
+}
+
+.browse{
+    background-color: rgba(28, 28, 28, 0.836);
+}
+.browse:hover{
+    background-color: rgb(0, 0, 0);
+}
