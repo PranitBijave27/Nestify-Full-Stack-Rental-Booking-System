@@ -1,70 +1,167 @@
-/* Layout */
-body {
-    background-color: #f8f9fa;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+:root{
+    --rose:#FF385C;
+    --rose-dark:#e31c5f;
+    --text-dark:#222;
+    --text-muted:#6c757d;
+}
+body{
+    margin:0;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+    background:#f8f9fa;
+}
+.error-wrapper{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+.error-card{
+    max-width:420px;
+    width:100%;
+    background:#fff;
+    border-radius:20px;
+    padding:40px 32px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
 }
 
-/* Card */
-.error-card {
-    max-width: 400px; /* Reduced width for a tighter look */
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+.brand-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 24px;
+    background:var(--rose);
+    color:#fff;
+    font-size:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:40% 60% 65% 35% / 45% 40% 60% 55%;
+    animation:blob 7s infinite ease-in-out;
 }
 
-/* Morphing Blob */
-.brand-blob {
-    background-color: #FF385C;
-    width: 60px; /* Smaller icon size */
-    height: 60px;
-    margin: 0 auto 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    animation: morphing 6s infinite ease-in-out;
+@keyframes blob{
+    0%,100%{
+        border-radius:40% 60% 65% 35% / 45% 40% 60% 55%;
+    }
+    50%{
+        border-radius:60% 40% 35% 65% / 55% 60% 40% 45%;
+    }
 }
 
-@keyframes morphing {
-    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+.error-code{
+    font-size:72px;
+    font-weight:800;
+    margin:0;
+    color:var(--text-dark);
 }
 
-/* 404 Text */
-.error-code {
-    font-size: 70px; /* Scaled down from 112px */
-    font-weight: 800;
-    color: #222222;
-    margin: 0;
+.error-title{
+    font-size:20px;
+    font-weight:700;
+    margin-top:8px;
 }
 
-/* Smaller, Simple Button */
-.btn-rose {
-    background-color: #FF385C;
-    color: #ffffff;
-    border: none;
-    padding: 10px 24px; /* Standard button padding */
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px; /* Fixed font size */
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
+.error-description{
+    font-size:14px;
+    color:var(--text-muted);
+    margin:12px 0 28px;
 }
 
-.btn-rose:hover {
-    background-color: #e31c5f;
+
+.error-search{
+    display:flex;
+    gap:10px;
+    margin-bottom:28px;
 }
 
-.browse{
-    background-color: rgba(28, 28, 28, 0.836);
+.search-input{
+    flex:1;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:14px;
 }
-.browse:hover{
-    background-color: rgb(0, 0, 0);
+
+.search-input:focus{
+    outline:none;
+    border-color:var(--rose);
+}
+
+.search-btn{
+    border:none;
+    background:var(--rose);
+    color:#fff;
+    padding:0 16px;
+    border-radius:8px;
+}
+
+.search-btn:hover{
+    background:var(--rose-dark);
+}
+
+.error-actions{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+}
+
+.btn-primary{
+    background:var(--rose);
+    color:#fff;
+    padding:10px 18px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.btn-primary:hover{
+    background:var(--rose-dark);
+}
+
+.btn-secondary{
+    background:#1c1c1c;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:600;
+}
+
+.btn-secondary:hover{
+    background:#000;
+}
+.error-help{
+    margin-top:28px;
+    padding-top:18px;
+    border-top:1px solid #eee;
+    font-size:13px;
+}
+.error-help a{
+    color:var(--rose);
+    font-weight:600;
+    text-decoration:none;
+}
+
+.error-help a:hover{
+    color:var(--rose-dark);
+}
+@media (max-width:500px){
+    .error-card{
+        padding:30px 22px;
+    }
+    .error-code{
+        font-size:60px;
+    }
+    .error-search{
+        flex-direction:column;
+    }
+    .search-btn{
+        width:100%;
+        padding:10px;
+    }
+    .error-actions{
+        flex-direction:column;
+    }
+
 }

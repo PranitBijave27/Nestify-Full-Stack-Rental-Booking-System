@@ -1,9 +1,48 @@
 <%- layout("/layouts/boilerplate") %>
-
+</style>
+<div class="filters-wrapper">
+  <div class="container">
+    <div class="filters-bar">
+      <a href="/listing?category=beach" class="filter-item">
+        <i class="fa-solid fa-water"></i>
+        <span>Beach</span>
+      </a>
+      <a href="/listing?category=mountain" class="filter-item">
+        <i class="fa-solid fa-mountain"></i>
+        <span>Mountain</span>
+      </a>
+      <a href="/listing?category=cabin" class="filter-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Cabins</span>
+      </a>
+      <a href="/listing?category=city" class="filter-item">
+        <i class="fa-solid fa-city"></i>
+        <span>City</span>
+      </a>
+      <a href="/listing?category=lake" class="filter-item">
+        <i class="fa-solid fa-water-ladder"></i>
+        <span>Lakes</span>
+      </a>
+      <a href="/listing?category=luxury" class="filter-item">
+        <i class="fa-solid fa-gem"></i>
+        <span>Luxury</span>
+      </a>
+      <a href="/listing?category=camping" class="filter-item">
+        <i class="fa-solid fa-campground"></i>
+        <span>Camping</span>
+      </a>
+      <a href="/listing?category=farm" class="filter-item">
+        <i class="fa-solid fa-tractor"></i>
+        <span>Farm</span>
+      </a>
+    </div>
+  </div>
+</div>
 <div class="container mt-4 mb-5">
   <h2 class="mb-4 fw-bold">Explore <span class="text-rose">Destinations</span></h2>
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% if(allListings.length>0) {%>
     <% allListings.forEach(function(listing) { %>
       <div class="col">
         <div class="listing-card h-100"> <a href="/listing/<%= listing._id %>" class="text-decoration-none">
@@ -30,4 +69,14 @@
       </div>
     <% }); %>
   </div>
+  <% } else{%>
+    <div class="col-12 mt-5 mb-5" style="width: 100%;">
+        <div class="d-flex flex-column align-items-center justify-content-center text-center mx-auto" style="min-height: 40vh;">
+            <i class="fa-solid fa-magnifying-glass-location fa-4x mb-4 text-muted" style="opacity: 0.5;"></i>
+            <h2 class="fw-bold">No Nests Found</h2>
+            <p class="text-muted">We couldn't find anything matching "<strong><%= search %></strong>".<br>Try checking your spelling or searching for a broader location.</p>
+            <a href="/listing" class="btn btn-dark mt-3 px-5 rounded-pill shadow-sm">Explore All</a>
+        </div>
+    </div>
+    <% } %>
 </div>
