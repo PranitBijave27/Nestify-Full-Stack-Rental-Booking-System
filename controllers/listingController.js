@@ -31,6 +31,7 @@ module.exports.createListing=async (req, res, next) => {
       price: data.price,
       location: data.location,
       country: data.country,
+      category:data.category,
       owner:req.user._id,
     };
     if(req.file){
