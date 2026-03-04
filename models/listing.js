@@ -45,6 +45,11 @@ const listingSchema=new Schema({
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User",
+    },
+    category: {
+        type: String,
+        enum: ["beach", "mountain", "cabin", "city", "lake", "luxury", "camping", "farm"],
+        required: true
     }
 });
 
