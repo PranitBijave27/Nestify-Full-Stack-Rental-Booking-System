@@ -14,7 +14,7 @@ module.exports.index=async (req, res) => {
     }else if (category) {
         query = { category: category };
     }
-    const allListings=await Listing.find(query);
+    const allListings=await Listing.find(query).select("title image price location category");;
   res.render("index", { allListings,search:search ||category });
 };
 
@@ -61,7 +61,7 @@ module.exports.showListing=async (req, res) => {
     const unsatisfiedCount = foundListing.reviews.filter(
       (r) => r.rating < 3,
     ).length;
-    res.render("show", { foundListing, satisfiedCount, unsatisfiedCount });
+    res.render("show", { foundListing ,showMap:true});
 }
 
 

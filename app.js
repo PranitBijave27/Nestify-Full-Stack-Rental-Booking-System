@@ -18,6 +18,7 @@ const LocalStrategy=require("passport-local");
 const User=require("./models/User");
 const userRouter=require("./routes/userRouter");
 const connectDB = require("./config/db");
+const compression = require('compression');
 
 const sessionOptions={
   secret:process.env.SECRET,
@@ -31,6 +32,7 @@ const sessionOptions={
   },
 };
 
+app.use(compression());
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(methodOverride("_method"));

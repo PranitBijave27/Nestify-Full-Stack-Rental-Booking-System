@@ -1,5 +1,4 @@
 <%- layout("/layouts/boilerplate") %>
-</style>
 <div class="filters-wrapper">
   <div class="container">
     <div class="filters-bar">
@@ -44,10 +43,11 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
     <% if(allListings.length>0) {%>
     <% allListings.forEach(function(listing) { %>
+      <% let optimizedUrl = listing.image.url.replace("/upload", "/upload/w_400,c_fill,q_auto,f_auto");%>
       <div class="col">
         <div class="listing-card h-100"> <a href="/listing/<%= listing._id %>" class="text-decoration-none">
             <div class="position-relative overflow-hidden rounded-top-4">
-              <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>">
+              <img src="<%= optimizedUrl %>" class="card-img-top" alt="<%= listing.title %>" loading="lazy">
               <div class="card-img-overlay d-flex justify-content-end align-items-start">
                 <i class="fa-regular fa-heart fs-4 text-white"></i>
               </div>
