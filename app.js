@@ -19,8 +19,19 @@ const User=require("./models/User");
 const userRouter=require("./routes/userRouter");
 const connectDB = require("./config/db");
 const compression = require('compression');
+const MongoStore=require("connect-mongodb-session")(session);
+
+const store=new MongoStore({
+  uri:process.env.MONGO_URI,
+  collection:'sessions',
+});
+
+store.on("error", function (err) {
+  console.log("SESSION STORE ERROR", err);
+});
 
 const sessionOptions={
+  store:store,
   secret:process.env.SECRET,
   resave:false,
   saveUninitialized:true,

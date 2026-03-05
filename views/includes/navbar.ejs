@@ -1,93 +1,53 @@
-<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top py-2">
+  <div class="container d-flex align-items-center">
+    
+    <div class="d-flex align-items-center me-3">
+      <button class="btn nav-back-btn me-2" onclick="goBack()">
+        <i class="fa-solid fa-arrow-left text-white"></i>
+      </button>
+      <a class="navbar-brand d-flex align-items-center" href="/listing">
+        <i class="fa-solid fa-feather-pointed brand-icon me-2"></i>
+        <span class="brand-text d-none d-sm-inline">Nestify</span>
+      </a>
+    </div>
 
-  <button class="btn nav-back-btn" onclick="goBack()">
-  <i class="fa-solid fa-arrow-left" style="color: white;"></i>
-</button>
-
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="/listing">
-      <i class="fa-solid fa-feather-pointed brand-icon me-2"></i>
-      <span class="brand-text">Nestify</span>
-    </a>
-
-    <!-- Mobile toggle -->
-    <button 
-      class="navbar-toggler" 
-      type="button" 
-      data-bs-toggle="collapse" 
-      data-bs-target="#navbarContent"
-      aria-controls="navbarContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarContent">
+      <div class="mx-auto my-2 my-lg-0" style="width: 100%; max-width: 400px;">
+        <form class="d-flex search-form" role="search" action="/listing" method="GET">
+          <input class="form-control search-input" type="search" name="search" placeholder="Search destinations" required>
+          <button class="btn btn-search" type="submit">Search
+          </button>
+        </form>
+      </div>
 
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/listing">Explore</a>
-        </li>
-        
-      </ul>
-
-      <form class="d-flex mx-auto search-form" role="search" action="/listing" method="GET">
-  
-  <input 
-    class="form-control search-input me-2"
-    type="search"
-    name="search"
-    placeholder="Search destinations"
-    required
-  >
-
-  <button class="btn btn-search" type="submit">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-
-</form>
-
-      <!-- Auth -->
-      <div class="navbar-nav ms-auto align-items-center">
+      <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
           <a class="nav-link" href="/listing/new">Nest your home</a>
         </li>
         <% if(!currUser){ %>
-
-          <a class="nav-link fw-semibold px-3" href="/signup">
-            Sign up
-          </a>
-          <a class="btn btn-rose rounded-pill px-4 ms-2" href="/login">
-            Log in
-          </a>
+          <li class="nav-item">
+            <a class="nav-link px-3" href="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-rose rounded-pill px-4 ms-lg-2" href="/login">Log in</a>
+          </li>
         <% } else { %>
-          <div class="nav-item dropdown">
-            <a 
-              class="nav-link dropdown-toggle d-flex align-items-center"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
               <i class="fa-solid fa-circle-user fs-4"></i>
             </a>
-
             <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4">
-
-              <li>
-                <a class="dropdown-item" href="/listing/new">
-                  Host your home
-                </a>
-              </li>
+              <li><a class="dropdown-item" href="/listing/new">Host your home</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li>
-                <a class="dropdown-item text-danger" href="/logout">
-                  Log out
-                </a>
-              </li>
+              <li><a class="dropdown-item text-danger" href="/logout">Log out</a></li>
             </ul>
-          </div>
+          </li>
         <% } %>
-      </div>
+      </ul>
     </div>
   </div>
 </nav>
