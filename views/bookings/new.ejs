@@ -1,0 +1,151 @@
+<%- layout("layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-7">
+      <h2 class="fw-bold mb-4">Confirm your stay</h2>
+
+      <section class="mb-4">
+        <h5 class="fw-bold">Your trip</h5>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div>
+            <p class="mb-0 fw-bold">Dates</p>
+            <p class="text-muted" id="date-summary">
+              Choose check-in and check-out dates
+            </p>
+          </div>
+        </div>
+      </section>
+      <hr class="my-4" />
+
+      <form
+        action="/listing/<%= listing._id %>/bookings"
+        method="POST"
+        class="needs-validation"
+        novalidate
+      >
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="checkIn" class="form-label fw-bold small"
+              >CHECK-IN</label
+            >
+            <input
+              type="date"
+              name="booking[checkIn]"
+              id="checkIn"
+              class="form-control form-control-lg border-secondary-subtle"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="checkOut" class="form-label fw-bold small"
+              >CHECK-OUT</label
+            >
+            <input
+              type="date"
+              name="booking[checkOut]"
+              id="checkOut"
+              class="form-control form-control-lg border-secondary-subtle"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit"
+          class="btn btn-danger btn-lg w-100 mt-5 py-3 fw-bold rounded-3 shadow-sm"
+          style="background-color: #fe424d; border: none">
+          Confirm Reservation
+        </button>
+      </form>
+    </div>
+
+    <div class="col-md-4 offset-md-1">
+      <div
+        class="card shadow-lg border-0 rounded-4 p-4 sticky-top"
+        style="top: 100px"
+      >
+        <div class="d-flex align-items-start mb-4">
+          <img src="<%= listing.image.url %>"
+            class="rounded-3 me-3"
+            style="width: 110px; height: 110px; object-fit: cover"/>
+          <div>
+            <p class="mb-0 small text-muted text-uppercase">
+              <%= listing.category %>
+            </p>
+            <h6 class="fw-bold mb-0"><%= listing.title %></h6>
+            <p class="small text-muted mt-1 mb-0">
+              <i class="fa-solid fa-star"></i> 4.85 ·
+              <span class="text-decoration-underline">Reviews</span>
+            </p>
+          </div>
+        </div>
+        <hr class="text-muted" />
+
+        <h5 class="fw-bold mb-3">Price details</h5>
+        <div class="d-flex justify-content-between mb-2">
+          <span>₹<%= listing.price.toLocaleString("en-IN") %> x
+            <span id="night-count">0</span> nights</span>
+          <span id="base-price">₹0</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-decoration-underline">Service fee</span>
+          <span>₹0</span>
+        </div>
+
+        <hr class="text-muted" />
+
+        <div class="d-flex justify-content-between fw-bold fs-5">
+          <span>Total (INR)</span>
+          <span id="total-display">₹0</span>
+        </div>
+
+        <div class="mt-4 p-3 bg-light rounded-3">
+          <small class="text-muted"
+            ><strong>Cancellation policy:</strong> Free cancellation for 48
+            hours. After that, cancel before check-in for a partial
+            refund.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", () => {
+    const checkInInput = document.getElementById("checkIn");
+    const checkOutInput = document.getElementById("checkOut");
+    const nightCount = document.getElementById("night-count");
+    const basePrice = document.getElementById("base-price");
+    const totalDisplay = document.getElementById("total-display");
+    const pricePerNight = Number("<%= listing.price %>");
+
+    const updateUI = () => {
+      const d1 = new Date(checkInInput.value);
+      const d2 = new Date(checkOutInput.value);
+
+      if (checkInInput.value && checkOutInput.value && d2 > d1) {
+        const diffDays = Math.ceil(Math.abs(d2 - d1) / 8.64e7);
+        const total = diffDays * pricePerNight;
+
+        // Update the HTML
+        if (nightCount) nightCount.innerText = diffDays;
+        if (basePrice)
+          basePrice.innerText = "₹" + total.toLocaleString("en-IN");
+        if (totalDisplay)
+          totalDisplay.innerText = "₹" + total.toLocaleString("en-IN");
+      }
+    };
+
+    if (checkInInput && checkOutInput) {
+      checkInInput.addEventListener("change", updateUI);
+      checkOutInput.addEventListener("change", updateUI);
+      // Prevent past dates
+      const today = new Date().toISOString().split("T")[0];
+      checkInInput.min = today;
+      checkInInput.addEventListener("input", () => {
+        checkOutInput.min = checkInInput.value;
+      });
+    } else {
+      console.error("Could not find Check-In or Check-Out inputs by ID");
+    }
+  });
+</script>

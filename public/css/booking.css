@@ -1,0 +1,21 @@
+/* Make inputs feel like Airbnb */
+.form-control-lg {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.form-control-lg:focus {
+    border-color: #fe424d !important;
+    background-color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(254, 66, 77, 0.1) !important;
+}
+
+/* Make the price card feel like it's "floating" */
+.sticky-top .card {
+    transition: transform 0.3s ease;
+}
+
+#total-display {
+    transition: color 0.3s ease;
+}

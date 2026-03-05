@@ -84,7 +84,7 @@
                     </div>
 
                     <% if(currUser && !currUser._id.equals(foundListing.owner._id)){ %>
-                        <form action="/listing/<%= foundListing._id %>/bookings" method="POST">
+                        <form action="/listing/<%= foundListing._id %>/bookings" method="get">
                             <div class="border rounded-3 mb-3 p-3 bg-light text-center">
                                 <small class="fw-bold text-muted text-uppercase"
                                     style="font-size: 0.6rem;">Availability</small>

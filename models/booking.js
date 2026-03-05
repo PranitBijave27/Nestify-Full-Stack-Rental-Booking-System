@@ -31,7 +31,9 @@ const bookingSchema=new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     }
 });
 
+const Booking=mongoose.model("Booking",bookingSchema);
+module.exports=Booking;

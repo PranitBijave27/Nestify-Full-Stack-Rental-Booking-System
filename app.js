@@ -3,13 +3,13 @@ if(process.env.NODE_ENV !="production"){
 }
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressErr");
 const listingRouter = require("./routes/listingRouter");
 const reviewRouter = require("./routes/reviewRouter");
+const bookingRouter=require("./routes/bookingRouter");
 const cookieParser=require("cookie-parser");
 const session=require("express-session");
 const flash=require("connect-flash");
@@ -62,7 +62,7 @@ app.use((req,res,next)=>{
 app.use("/",userRouter);
 app.use("/listing", listingRouter);
 app.use("/listing/:id/reviews",reviewRouter);
-
+app.use("/listing/:id/bookings",bookingRouter);
 //404 handler
 app.use((req, res, next) => {
   next(new ExpressError(404, "page not found"));
