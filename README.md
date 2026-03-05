@@ -21,7 +21,7 @@ https://nestify-full-stack-rental-booking-system.onrender.com/
 **Frontend:** EJS (Embedded JavaScript Templates), Bootstrap 5, FontAwesome  
 **Auth:** Passport.js (Local Strategy)  
 
+---
 ## 🏗️ Architecture
-
-The project follows the **MVC (Model-View-Controller)** design pattern to maintain a clean and scalable codebase.
+* The project follows the **MVC (Model-View-Controller)** design pattern to maintain a clean and scalable codebase.
 ---
