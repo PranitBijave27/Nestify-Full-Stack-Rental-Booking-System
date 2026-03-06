@@ -1,4 +1,4 @@
-# Nestify | Full-Stack Rental Marketplace
+# Nestify | Full-Stack Property Rental Platform
 
 Nestify is a comprehensive web application designed to connect travelers with unique stays. Built with the **MVC (Model-View-Controller)** architecture, the platform features robust user authentication, listing management, and an interactive review system.
 
