@@ -9,14 +9,14 @@ const userSchema=new Schema({
         required:true,
         unique:true,
         lowercase:true,
-        trim:true
+        trim:true,
+        match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"]
     },
 },
   {
     timestamps:true
 });
-// console.log("Type of plugin:", typeof passportLocalMongoose);
-// console.log("Content of plugin:", passportLocalMongoose);
+//  passport-local-mongoose automatically adds: username ,hashed password + salt
 userSchema.plugin(passportLocalMongoose.default);
 
 module.exports=mongoose.model("User",userSchema);

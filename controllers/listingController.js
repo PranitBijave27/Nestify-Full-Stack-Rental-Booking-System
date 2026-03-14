@@ -55,13 +55,6 @@ module.exports.showListing=async (req, res) => {
       req.flash("error", "The listing you are looking for does not exist!");
       return res.redirect("/listing");
     }
-
-    const satisfiedCount = foundListing.reviews.filter(
-      (r) => r.rating >= 3,
-    ).length;
-    const unsatisfiedCount = foundListing.reviews.filter(
-      (r) => r.rating < 3,
-    ).length;
     res.render("show", { foundListing ,showMap:true});
 }
 

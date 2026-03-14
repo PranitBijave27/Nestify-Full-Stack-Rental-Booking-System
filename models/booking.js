@@ -18,7 +18,13 @@ const bookingSchema=new Schema({
     },
     checkOut:{
         type:Date,
-        required:true
+        required:true,
+        validate:{
+            validator:function(){
+                return this.checkOut>this.checkIn;
+            },
+            message:"Check-out date must be after check-in date"
+        }
     },
     totalPrice:{
         type:Number,
@@ -29,11 +35,7 @@ const bookingSchema=new Schema({
         enum: ["pending", "confirmed", "cancelled"],
         default: "pending"
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    }
-});
+},{timestamps:true});
 
 const Booking=mongoose.model("Booking",bookingSchema);
 module.exports=Booking;

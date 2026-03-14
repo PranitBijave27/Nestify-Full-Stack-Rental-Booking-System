@@ -10,7 +10,6 @@ const ExpressError = require("./utils/ExpressErr");
 const listingRouter = require("./routes/listingRouter");
 const reviewRouter = require("./routes/reviewRouter");
 const bookingRouter=require("./routes/bookingRouter");
-const cookieParser=require("cookie-parser");
 const session=require("express-session");
 const flash=require("connect-flash");
 const passport=require("passport");
@@ -34,7 +33,7 @@ const sessionOptions={
   store:store,
   secret:process.env.SECRET,
   resave:false,
-  saveUninitialized:true,
+  saveUninitialized:false,
   cookie:{
     expires:Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge:7 * 24 * 60 * 60 * 1000,
@@ -51,7 +50,6 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -102,7 +100,8 @@ async function startServer() {
       console.log(`Server Started on http://localhost:${PORT}/listing`);
     });
   } catch (err) {
-    console.log("server failed to start");
+    console.log("server failed to start",err);
+    process.exit(1);
   }
 }
 

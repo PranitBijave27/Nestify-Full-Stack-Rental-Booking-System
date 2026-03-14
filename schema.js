@@ -16,19 +16,19 @@ module.exports.listingSchema=joi.object({
             .required(),
 
         image:joi.object({
-            filname:joi.string()
+            filename:joi.string()
                 .default("listingimage"),
             url:joi.string()
                 .allow("",null)
                 .default(DEFAULT_IMG)
-                .custom((value,helper)=>{
-                    if(!value || value.trim()==="") return DEFAULT_IMG;
-                    return value.trim();
-                })
         }).default(),
         
         price:joi.number()
             .min(0)
+            .max(100000)
+            .required(),
+        category: joi.string()
+            .valid("beach", "mountain", "cabin", "city", "lake", "luxury", "camping", "farm", "snow", "castle")
             .required(),
 
         location:joi.string()
@@ -43,6 +43,6 @@ module.exports.listingSchema=joi.object({
 module.exports.reviewSchema=joi.object({
     review:joi.object({
         rating:joi.number().required().min(1).max(5),
-        comment:joi.string().required()
+        comment:joi.string().min(10).required()
     }).required()
 });

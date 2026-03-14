@@ -7,7 +7,10 @@ const { isOwner } = require("../middlewares/isOwner");
 const listingController = require("../controllers/listingController");
 const multer=require("multer");
 const {storage}=require("../config/cloudConfig");
-const upload=multer({storage});
+const upload=multer({
+      storage,
+      limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max
+});
 
 
 router.route("/")

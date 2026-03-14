@@ -1,4 +1,3 @@
-const { types, required } = require("joi");
 const mongoose=require("mongoose");
 const Schema =mongoose.Schema;
 
@@ -7,6 +6,7 @@ const reviewschmea=new Schema({
         type:String,
         required:[true,"Comment is required"],
         trim:true,
+        minlength: [10, "Comment must be at least 10 characters"]
     },
     rating:{
         type:Number,
@@ -17,12 +17,9 @@ const reviewschmea=new Schema({
     author:{
         type:Schema.Types.ObjectId,
         ref:"User",
-    },
-    createdAt:{
-        type:Date,
-        default:Date.now
+        required:true
     }
-});
+}, { timestamps: true });
 
 const Review =mongoose.model("Review",reviewschmea);
 
